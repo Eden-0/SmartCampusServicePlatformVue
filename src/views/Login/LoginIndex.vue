@@ -91,6 +91,7 @@ export default {
           //设置token到cookie中，
           addCookie("token", data.data.token)
           this.$message.success('登录成功')
+
           this.$store.commit('setLoginUser', data.data)
           this.$router.push('/noticeandnews')
         }else {

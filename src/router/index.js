@@ -1,9 +1,4 @@
-
-
 import Vue from 'vue'
-
-Vue.use(VueRouter)
-
 import VueRouter from 'vue-router'
 import HomeBody from "@/views/Home/HomeBody";
 import LoginIndex from "@/views/Login/LoginIndex";
@@ -11,19 +6,13 @@ import ShowInfoView from "@/views/ShowInfoView";
 import NoticeAndNews from "@/views/NoticeAndNews";
 import NoticeList from "@/components/notice/NoticeList";
 import NewsList from "@/components/notice/NewsList";
+import RetakeView from "@/views/Retake/RetakeView";
+import RetakeChoiceView from "@/views/Retake/RetakeChoiceView";
+import ReTestView from "@/views/Retake/ReTestView";
 
-const TakeCourse = () => import('@/views/CourseSituation/TakeCourse')
-const UnpassCourse = () => import('@/views/CourseSituation/UnpassCourse')
-const SelectCourse = () => import('@/views/CourseSituation/SelectCourse')
-
-
+Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'login',
-    component: LoginIndex
-  },
   {
     path: '/home',
     name: 'home',
@@ -49,24 +38,29 @@ const routes = [
         name:'newslist',
         component: NewsList
       },
-      {
-        path: '/takecourse',
-        name: '已修读学分',
-        component: TakeCourse
-      },
-      {
-        path: '/unpasscourse',
-        name: '不及格的课程',
-        component: UnpassCourse
-      },
-      {
-        path: '/selectcourse',
-        name: '选课',
-        component: SelectCourse
-      }
     ]
-  }
 
+  },
+   {
+     path: '/',
+     name: 'login',
+     component: LoginIndex
+   },
+  {
+    path: '/home/retake',
+    name: 'retake',
+    component: RetakeView
+  },
+  {
+    path: '/home/retakechoice',
+    name: 'retakechoice',
+    component: RetakeChoiceView
+  },
+  {
+    path: '/home/retest',
+    name: 'retest',
+    component: ReTestView
+  },
 ]
 
 const router = new VueRouter({

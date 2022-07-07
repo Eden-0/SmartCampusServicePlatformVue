@@ -8,7 +8,9 @@
           text-color="#333333"
           background-color="#FFFFFF"
           active-text-color="#409EFF"
-          :unique-opened="true">
+          :unique-opened="true"
+          @open="handleOpen"
+          @close="handleClose">
         <el-menu-item index="1" @click="toHome">
             <i class="el-icon-s-home"></i>
             <span>首页公告</span>
@@ -36,9 +38,9 @@
             <span>课程情况</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item @click="toTakeCourse" >修读总揽</el-menu-item>
-            <el-menu-item @click="toUnpassCourse">不及格课程</el-menu-item>
-            <el-menu-item @click="selectCourse">选课</el-menu-item>
+            <el-menu-item index="4-1">已修读学分</el-menu-item>
+            <el-menu-item index="4-2">不及格课程情况</el-menu-item>
+            <el-menu-item index="4-3">查看选课情况</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
@@ -54,18 +56,31 @@
         </el-submenu>
 
         <el-submenu index="6">
+                  <template slot="title">
+                    <i class="el-icon-s-finance"></i>
+                    <span>重修/补考</span>
+                  </template>
+                  <el-menu-item-group>
+<!--                    <el-menu-item index="6-1" @click="retake">重修报名</el-menu-item>-->
+						<!-- 实际编写时发现重修报名功能不需要，故注释掉 -->
+                    <el-menu-item index="6-2" @click="retakeChoice">重修选课</el-menu-item>
+        			<el-menu-item index="6-3" @click="reTest">补考考试安排</el-menu-item>
+                  </el-menu-item-group>
+                </el-submenu>
+
+        <el-submenu index="7">
           <template slot="title">
-            <i class="el-icon-s-platform"></i>
+            <i class="el-icon-s-finance"></i>
             <span>登录助手</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="6-1" >登录教务系统</el-menu-item>
-            <el-menu-item index="6-2" >登录迎新系统</el-menu-item>
+            <el-menu-item index="7-1" @click="jumptoEDU">登录教务系统</el-menu-item>
+            <el-menu-item index="7-2" @click="jumptoNEW">登录迎新系统</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
 
-        <el-menu-item index="7">
+        <el-menu-item index="8">
           <div style="height: 100%;width: 100%">
             <i class="el-icon-s-opportunity"></i>
             <span>校内资源访问</span>
@@ -98,29 +113,41 @@ export default {
     return {
       showInfoPath: '/showinfo',
       homePath: '/noticeandnews',
-      takeCoursePath: '/takecourse',
-      unpassCoursePath: '/unpassCourse',
-      reTakeCoursePath: '/selectcourse',
       isShowAnnounce: true,
+
+      retakePath:'/home/retake',
+      retakeChoicePath:'/home/retakechoice',
+      reTestPath:'/home/retest',
     }
   },
   methods: {
-
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
     showInfo() {
       this.$router.push(this.showInfoPath)
     },
     toHome() {
       this.$router.push(this.homePath)
     },
-    toTakeCourse(){
-      this.$router.push(this.takeCoursePath)
+    jumptoEDU() {
+        window.location.href = 'http://zhjw.scu.edu.cn/login'
     },
-    toUnpassCourse(){
-      this.$router.push(this.unpassCoursePath)
+    jumptoNEW() {
+        window.location.href = 'http://yx.scu.edu.cn/#/login'
     },
-    selectCourse(){
-      this.$router.push(this.reTakeCoursePath)
-    }
+    retake(){
+        this.$router.push(this.retakePath)
+    },
+    retakeChoice(){
+        this.$router.push(this.retakeChoicePath)
+    },
+    reTest(){
+        this.$router.push(this.reTestPath)
+   	},
   }
 }
 </script>

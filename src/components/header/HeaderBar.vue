@@ -26,14 +26,7 @@
     </div>
     <div
         style="position: absolute; right: 0; width: 180px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">
-      <el-dropdown trigger="click" @command="handleCommand">
-        <span class="el-dropdown-link">
-          <span>{{ this.Name }}</span><i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item icon="el-icon-s-fold" command="exit">退出</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <span>{{ this.Name }}</span>
     </div>
     <el-dialog
         title="作息时间表"
@@ -66,34 +59,6 @@ export default {
     showScheduleImage() {
       this.dialogVisible = true;
     },
-    handleCommand(command) {
-      if (command==="exit") {
-        this.$confirm('确定要退出吗？若如此做将返回登录界面', '警告', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              this.$store.commit('setLoginUser', undefined)
-              this.$router.push("/")
-              done();
-            } else {
-              done();
-            }
-          }
-        }).then(action => {
-
-        });
-      }
-    }
-  },
-  beforeCreate() {
-    if(this.$store.getters.getLoginUser === undefined) {
-      this.$router.push("/")
-      this.$message({
-        message: '请先登录',
-        type: 'warning'
-      });
-    }
   }
 }
 </script>

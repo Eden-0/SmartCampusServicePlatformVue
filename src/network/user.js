@@ -65,22 +65,3 @@ export function updateUserInfoNetwork(userId, phone, email, homeAddress) {
     })
 }
 
-/**
- * 查询用户学期
- */
-export function queryUserSemester(userId){
-    return request({
-        url:'/user/queryUserSemester',
-        method: 'post',
-        data:{
-            userId
-        }
-    })
-}
-
-export function loginValidateNetwork(){
-    return request({
-        url: '/user/validate',
-        method: 'post'
-    })
-}
